@@ -1,6 +1,7 @@
 from app.models import Model
 from django.db import models
 from django.contrib.auth.models import User
+from tastypie.models import ApiKey
 
 class UserProfile(Model):
     user = models.ForeignKey(User, unique=True)
@@ -12,3 +13,4 @@ class UserProfile(Model):
 # using user.profile will get or create a user profile
 # object
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+User.api_key = property(lambda u: ApiKey.objects.get_or_create(user=u)[0].key)

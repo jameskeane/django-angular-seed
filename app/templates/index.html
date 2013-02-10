@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width"/>
         {% compress css %}
         <link type="text/x-scss" rel="stylesheet" href="/static/scss/main.scss"/>
+        <link type="text/css" rel="stylesheet" href="/static/vendor/hint.min.css"/>
         {% endcompress %}
     </head>
     <body ng-app="staticApp">
@@ -25,14 +26,21 @@
             <script src="/static/vendor/json3.min.js"></script>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
+        <!-- NAVBAR
+        ================================================== -->
+        <div class="ng-include: '/static/views/nav.html'"></div>
+
         <div class="container" ng-view></div>
 
+        <script src="/static/vendor/jquery-1.9.1.min.js"></script>
         <script src="/static/vendor/angular.js"></script>
 
         {% compress js %}
-        <script type="text/javascript" src="/static/js/app.js"></script>
-        <script type="text/javascript" src="/static/js/controllers/main.js"></script>
+        <script type="text/javascript" src="/static/app.js"></script>
+        <script type="text/javascript" src="/static/controllers/main.js"></script>
+        <script type="text/javascript" src="/static/controllers/login.js"></script>
+
+        <script type="text/javascript" src="/static/vendor/bootstrap/bootstrap-dropdown.js"></script>
         {% endcompress %}
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -42,5 +50,16 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+
+        {% if user.is_authenticated %}
+        <script type="text/javascript">
+          staticApp.run(function($rootScope) {
+            $rootScope.user = {{user_json|safe}};
+          });
+          staticApp.config(['$httpProvider', function($httpProvider) {   
+            $httpProvider.defaults.headers.common['Authorization'] = 'APIKey {{user.username}}:{{user.api_key}}';
+          }]);
+        </script>
+        {% endif %}
     </body>
 </html>
