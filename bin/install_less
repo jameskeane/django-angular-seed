@@ -2,3 +2,4 @@
 set -eo pipefail
 
 npm install -g less
+gem install sass
