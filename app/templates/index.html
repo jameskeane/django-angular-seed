@@ -14,7 +14,7 @@
         <link type="text/x-scss" rel="stylesheet" href="/static/scss/main.scss"/>
         {% endcompress %}
     </head>
-    <body ng-app="staticApp">
+    <body ng-app="App">
 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -52,11 +52,11 @@
 
         {% if user.is_authenticated %}
         <script type="text/javascript">
-          staticApp.run(function($rootScope) {
+          App.run(function($rootScope) {
             $rootScope.user = {{user_json|safe}};
           });
-          staticApp.config(['$httpProvider', function($httpProvider) {   
-            $httpProvider.defaults.headers.common['Authorization'] = 'APIKey {{user.username}}:{{user.api_key}}';
+          App.config(['$httpProvider', function($httpProvider) {   
+            $httpProvider.defaults.headers.common['Authorization'] = 'Token {{user.api_key}}';
           }]);
         </script>
         {% endif %}

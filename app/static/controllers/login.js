@@ -1,21 +1,26 @@
 'use strict';
 
-staticApp.controller('LoginCtrl', function($scope, $http) {
+App.controller('LoginCtrl', function($scope, $http, $location, $rootScope) {
   $scope.login = function() {
     $scope.error = false;
     $scope.loading = true;
 
     $http.get('/auth', {
       headers: {
-        'Authorization': $scope.user + ':' + $scope.password
+        'Authorization': $scope.username + ':' + $scope.password
       }
     }).
-    success(function(data, status) {
-      window.location = '/';
+    success(function(user, status) {
+      $rootScope.user = user;
+      App.config(['$httpProvider', function($httpProvider) {   
+        $httpProvider.defaults.headers.common['Authorization'] = 'Token ' + user.api_key;
+      }]);
+
+      $location.path("/");
     }).
     error(function(data, status) {
       $scope.error = true;
       $scope.loading = false;
     });
-  }
+  };
 });

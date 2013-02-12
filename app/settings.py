@@ -129,7 +129,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django_extensions',
     'south',
-    'tastypie',
+    'rest_framework',
+    'rest_framework.authtoken',  # Rest Framework API Token authentication
     'compressor',
     'app'
 )

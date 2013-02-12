@@ -1,6 +1,6 @@
 'use strict';
 
-var staticApp = angular.module('staticApp', [])
+var App = angular.module('App', [])
   .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
@@ -17,7 +17,7 @@ var staticApp = angular.module('staticApp', [])
       });
   }]);
 
-staticApp.directive('activeLink', ['$location', function(location) {
+App.directive('activeLink', ['$location', function(location) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs, controller) {

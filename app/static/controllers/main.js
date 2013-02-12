@@ -1,11 +1,11 @@
 'use strict';
 
-staticApp.controller('MainCtrl', function($scope) {
+App.controller('MainCtrl', function($scope) {
   $scope.awesomeThings = [
     'HTML5 Boilerplate',
     'AngularJS',
     'Testacular',
-    'django-tastypie',
+    'django-restframework',
     'django-south',
     'django-compressor'
   ];
