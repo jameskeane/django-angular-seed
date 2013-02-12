@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.views.generic.simple import redirect_to
 from rest_framework.renderers import JSONRenderer
+from django.conf import settings
 
 # Enable the admin site
 from django.contrib import admin
@@ -71,5 +72,5 @@ urlpatterns = patterns('',
     url(r'^logout/?', vlogout, name='logout'),
 
     # Catch all, for history API routing
-    url(r'^.*', index, name='index')
+    url(r'^/?$', index, name='index')
 )

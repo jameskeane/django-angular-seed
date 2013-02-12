@@ -1,8 +1,7 @@
 'use strict';
 
 var App = angular.module('App', [])
-  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+  .config(['$routeProvider', '$locationProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: '/static/views/main.html',
