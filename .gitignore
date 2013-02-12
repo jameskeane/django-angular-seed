@@ -1,5 +1,5 @@
 *.pyc
 env/
-CACHE/
+dist/
 .sass-cache/
 *.db
