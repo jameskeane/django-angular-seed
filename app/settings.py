@@ -1,7 +1,7 @@
 import os
 
 # Django settings for hammer project.
-DEBUG = False if os.environ['ENV'].lower() == 'production' else True
+DEBUG = False if os.environ.get('ENV', 'local').lower() == 'production' else True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
