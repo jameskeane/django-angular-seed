@@ -142,7 +142,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-sass', 'sass {infile} {outfile}'),
     ('text/x-scss', 'sass --scss {infile} {outfile}'),
     ('text/stylus', 'stylus < {infile} > {outfile}'),
-    ('text/foobar', 'path.to.MyPrecompilerFilter'),
+    ('text/ng-template', 'python manage.py ng_compile {infile} > {outfile}'),
 )
 COMPRESS_URL = STATIC_URL
 
