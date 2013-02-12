@@ -6,4 +6,4 @@ py-bcrypt==0.2
 South==0.7.6
 django-compressor==1.2
 djangorestframework==2.1.17
-django-herokuify==1.0.pre3
+dj-database-url==0.2.1
