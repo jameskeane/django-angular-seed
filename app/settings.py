@@ -149,8 +149,8 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_URL = STATIC_URL
 if ENV == "production":
     COMPRESS_PRECOMPILERS += (
-        ('text/x-sass', './.bin/sass {infile} {outfile}'),
-        ('text/x-scss', './.bin/sass --scss {infile} {outfile}'),
+        ('text/x-sass', 'export GEM_HOME=.gems;./.bin/sass {infile} {outfile}'),
+        ('text/x-scss', 'export GEM_HOME=.gems;./.bin/sass --scss {infile} {outfile}'),
     )
 else:
     COMPRESS_PRECOMPILERS += (
