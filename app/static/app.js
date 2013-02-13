@@ -21,7 +21,7 @@ App.directive('activeLink', ['$location', function(location) {
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
             var clazz = attrs.activeLink;
-            var path = $(element).find('a').attr('href');
+            var path = $(element).find('a').attr('href').substring(1);
 
             scope.location = location;
             scope.$watch('location.path()', function(newPath) {
