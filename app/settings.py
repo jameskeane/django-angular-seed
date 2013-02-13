@@ -1,7 +1,8 @@
 import os
 
 # Django settings for hammer project.
-DEBUG = False if os.environ.get('ENV', 'local').lower() == 'production' else True
+ENV = os.environ.get('ENV', 'local').lower()
+DEBUG = False if ENV == 'production' else True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -140,12 +141,21 @@ INSTALLED_APPS = (
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/less', 'lessc {infile} {outfile}'),
-    ('text/x-sass', 'sass {infile} {outfile}'),
-    ('text/x-scss', 'sass --scss {infile} {outfile}'),
     ('text/stylus', 'stylus < {infile} > {outfile}'),
     ('text/ng-template', 'python manage.py ng_compile {infile} > {outfile}'),
 )
+
 COMPRESS_URL = STATIC_URL
+if ENV is 'production':
+    COMPRESS_PRECOMPILERS += (
+        ('text/x-sass', './.bin/sass {infile} {outfile}'),
+        ('text/x-scss', './.bin/sass --scss {infile} {outfile}'),
+    )
+else:
+    COMPRESS_PRECOMPILERS += (
+        ('text/x-sass', 'sass {infile} {outfile}'),
+        ('text/x-scss', 'sass --scss {infile} {outfile}'),
+    )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
