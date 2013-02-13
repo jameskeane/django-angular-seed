@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-npm install -g less
+if ! which less; then npm install -g less; fi
 gem install -n .bin -i .gems sass
-npm install -g coffee-script
+if ! which coffee; then npm install -g coffee-script; fi
