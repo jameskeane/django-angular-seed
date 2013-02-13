@@ -6,3 +6,4 @@ South==0.7.6
 django-compressor==1.2
 djangorestframework==2.1.17
 dj-database-url==0.2.1
+psycopg2==2.4.5
