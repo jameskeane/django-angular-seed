@@ -1,5 +1,6 @@
 *.pyc
 env/
+.env
 dist/
 .sass-cache/
 *.db
