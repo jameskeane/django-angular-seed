@@ -2,7 +2,7 @@ import os
 
 # Django settings for hammer project.
 ENV = os.environ.get('ENV', 'local').lower()
-print '---------ENV', ENV
+
 DEBUG = False if ENV == 'production' else True
 TEMPLATE_DEBUG = DEBUG
 
@@ -147,7 +147,7 @@ COMPRESS_PRECOMPILERS = (
 )
 
 COMPRESS_URL = STATIC_URL
-if ENV is 'production':
+if ENV == "production":
     COMPRESS_PRECOMPILERS += (
         ('text/x-sass', './.bin/sass {infile} {outfile}'),
         ('text/x-scss', './.bin/sass --scss {infile} {outfile}'),
@@ -188,6 +188,6 @@ LOGGING = {
 }
 
 # Parse database configuration from $DATABASE_URL
-if os.environ.get('ENV', 'local').lower() is "production":
+if os.environ.get('ENV', 'local').lower() == "production":
     import dj_database_url
     DATABASES['default'] = dj_database_url.config()
