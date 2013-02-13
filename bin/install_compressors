@@ -2,4 +2,5 @@
 set -eo pipefail
 
 npm install -g less
-gem install sass
+sudo gem install sass
+npm install -g coffee

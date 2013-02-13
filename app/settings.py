@@ -177,5 +177,6 @@ LOGGING = {
 }
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+if os.environ.get('ENV', 'local').lower() is "production":
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()

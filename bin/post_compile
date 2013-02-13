@@ -15,9 +15,9 @@ if [ -f bin/install_nodejs ]; then
     bin/install_nodejs
 
     if [ -f bin/install_less ]; then
-        echo "-----> Running install_lessc"
-        chmod +x bin/install_less
-        bin/install_less
+        echo "-----> Running install_compressors"
+        chmod +x bin/install_compressors
+        bin/install_compressors
     fi
 fi
 
