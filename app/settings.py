@@ -1,8 +1,8 @@
 import os
 
 # Django settings for hammer project.
-ENV = os.environ.get('ENV', 'local').lower()
-PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+ENV = os.environ.get('ENV', 'development').lower()
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 DEBUG = False if ENV == 'production' else True
 TEMPLATE_DEBUG = DEBUG
@@ -60,7 +60,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_DIR, '../dist/')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'dist/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -143,21 +143,22 @@ INSTALLED_APPS = (
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
     ('text/less', 'lessc {infile} {outfile}'),
+    ('text/x-sass', 'sass {infile} {outfile}'),
+    ('text/x-scss', 'sass --scss {infile} {outfile}'),
     ('text/stylus', 'stylus < {infile} > {outfile}'),
     ('text/ng-template', 'python manage.py ng_compile {infile} > {outfile}'),
 )
 
-COMPRESS_URL = STATIC_URL
-if ENV == "production":
-    COMPRESS_PRECOMPILERS += (
-        ('text/x-sass', 'export GEM_HOME=.gems;./.bin/sass {infile} {outfile}'),
-        ('text/x-scss', 'export GEM_HOME=.gems;./.bin/sass --scss {infile} {outfile}'),
-    )
-else:
-    COMPRESS_PRECOMPILERS += (
-        ('text/x-sass', 'sass {infile} {outfile}'),
-        ('text/x-scss', 'sass --scss {infile} {outfile}'),
-    )
+if ENV == 'production':
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_PRELOAD_METADATA = True
+
+    COMPRESS_ENABLED = True
+    COMPRESS_OFFLINE = True
+    COMPRESS_STORAGE = STATICFILES_STORAGE = 'app.config.storage.CachedS3BotoStorage'
+    COMPRESS_URL = STATIC_URL
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
