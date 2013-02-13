@@ -3,4 +3,4 @@ set -eo pipefail
 
 npm install -g less
 gem install -n .bin -i .gems sass
-npm install -g coffee
+npm install -g coffee-script
