@@ -159,6 +159,7 @@ if ENV == 'production':
     COMPRESS_OFFLINE = True
     COMPRESS_STORAGE = STATICFILES_STORAGE = 'app.config.storage.CachedS3BotoStorage'
     COMPRESS_URL = STATIC_URL
+    COMPRESS_ROOT = STATIC_ROOT
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
