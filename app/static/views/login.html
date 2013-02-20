@@ -3,10 +3,10 @@
   <div class="alert alert-error" ng-show="error">
     Wrong username/password.
   </div>
-  <input type="text" class="input-block-level" placeholder="Email address" ng-model="username">
-  <input type="password" class="input-block-level" placeholder="Password" ng-model="password">
+  <input name="username" type="text" class="input-block-level" placeholder="Email address" ng-model="username">
+  <input name="password" type="password" class="input-block-level" placeholder="Password" ng-model="password">
   <label class="checkbox">
     <input type="checkbox" value="remember-me"> Remember me
   </label>
-  <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+  <button class="btn btn-large btn-primary" type="submit" id="signin">Sign in</button>
 </form>

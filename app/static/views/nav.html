@@ -14,10 +14,10 @@
         <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
         <ul class="nav pull-right" ng-show="user">
           <li><a href="#">{{user.username}}</a></li>
-          <li><a href="/logout" target="_self">Logout</a></li>
+          <li><a id="logoutbtn" href="/logout" target="_self">Logout</a></li>
         </ul>
         <ul class="nav pull-right" ng-hide="user">
-          <li active-link="active"><a href="#/login" title="Login">Login</a></li>
+          <li active-link="active"><a id="loginbtn" href="#/login" title="Login">Login</a></li>
         </ul>
         <div class="nav-collapse collapse">
           <ul class="nav">
