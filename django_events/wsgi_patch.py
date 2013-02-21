@@ -13,6 +13,7 @@ class EventsWSGIHandler(WSGIHandler):
 
     def __call__(self, environ, start_response):
         path = environ.get('PATH_INFO')
+
         if not path.lstrip('/').startswith(EVENTS_RESOURCE) or not GEVENT_ENABLED:
             return self.application(environ, start_response)
 
@@ -50,7 +51,7 @@ class EventsWSGIHandler(WSGIHandler):
                 break
 
         if response is None:
-            return EventsMiddleware().handle_stream(request, start_response)
+            return EventsMiddleware().handle_stream(request, start_response, environ.get('gunicorn.socket', None))
         else:
             try:
                 status_text = STATUS_CODE_TEXT[response.status_code]

@@ -1,5 +1,5 @@
 from django_events import signals
-from gevent.event import Event
+from gevent.event import AsyncResult
 from gevent.queue import Queue
 
 class Engine(object):
