@@ -97,6 +97,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django_events.middleware.EventsMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -131,12 +132,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django_events',
     'django_extensions',
     'south',
     'rest_framework',
     'rest_framework.authtoken',  # Rest Framework API Token authentication
     'compressor',
-    'app'
+    'app',
 )
 
 # Configure django_compressor to precompile all the files

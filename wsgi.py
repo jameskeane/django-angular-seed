@@ -23,6 +23,10 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
+# TODO: we could remove this somehow?
+from django_events.wsgi_patch import EventsWSGIHandler
+application = EventsWSGIHandler(application)
+
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
