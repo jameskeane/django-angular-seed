@@ -1,6 +1,7 @@
 import time
 from django.conf import settings
 from django.http import HttpResponse
+from django.utils.importlib import import_module
 from django_events import GEVENT_ENABLED, EVENTS_RESOURCE
 import json
 
@@ -14,7 +15,10 @@ class EventsMiddleware(object):
 
     def handle_stream(self, request, start_response):
         start_response("200", [('Content-Type', 'text/event-stream')])
-        yield json.dumps(request.user.is_authenticated())
-        yield "3"
-        time.sleep(10)
-        yield "4"
+        engine_class = import_module( getattr(settings, 'EVENTS_ENGINE', 'django_events.backends.memory_backend')).Engine
+        engine = engine_class(request.user, request.session)
+
+        while True:
+            event = engine.queue.get()
+
+            yield 'data: %s\n\n' % event['payload']

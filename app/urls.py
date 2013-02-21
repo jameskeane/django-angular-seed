@@ -6,6 +6,8 @@ from django.views.generic.simple import redirect_to
 from rest_framework.renderers import JSONRenderer
 from django.conf import settings
 
+import django_events as Events
+
 # Enable the admin site
 from django.contrib import admin
 admin.autodiscover()
@@ -30,6 +32,8 @@ def index(request):
     if request.user.is_authenticated():
         serialized = api.user.UserSerializer(request.user)
         user_json = serialized.data
+
+    Events.broadcast('view', 'index')
 
     return render_to_response('index.html', {
       'user': request.user,
