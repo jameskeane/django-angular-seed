@@ -1,10 +1,11 @@
-from django.core.handlers.wsgi import WSGIRequest, WSGIHandler, STATUS_CODE_TEXT
+from django.core.handlers.wsgi import WSGIHandler, STATUS_CODE_TEXT
 from django.core.handlers import base
 from django.core import signals
 from django.core.urlresolvers import set_script_prefix
 
 from django_events.middleware import EventsMiddleware
 from django_events import GEVENT_ENABLED, EVENTS_RESOURCE
+
 
 class EventsWSGIHandler(WSGIHandler):
     def __init__(self, application):
@@ -36,10 +37,9 @@ class EventsWSGIHandler(WSGIHandler):
             finally:
                 self.initLock.release()
 
-
         set_script_prefix(base.get_script_name(environ))
         signals.request_started.send(sender=self.__class__)
-        
+
         # TODO: error handling, see: django.core.handlers.wsgi.WSGIHandler
         request = self.request_class(environ)
         response = None

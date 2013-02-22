@@ -25,7 +25,8 @@ application = get_wsgi_application()
 
 # TODO: we could remove this somehow?
 from django_events.wsgi_patch import EventsWSGIHandler
-application = EventsWSGIHandler(application)
+from django.contrib.staticfiles.handlers import StaticFilesHandler
+application = EventsWSGIHandler(StaticFilesHandler(application))
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
