@@ -1,5 +1,17 @@
 'use strict';
 
+
+if (waffle.switch_is_active('Login')) {
+    // enable the route
+    App.config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+          .when('/login', {
+            templateUrl: '/static/views/login.html',
+            controller: 'LoginCtrl'
+          });
+    }]);
+}
+
 App.controller('LoginCtrl', function($scope, $http, $location, $rootScope) {
   $scope.login = function() {
     $scope.error = false;

@@ -71,6 +71,9 @@ urlpatterns = patterns('',
     url(r'^auth/?', auth, name='auth'),
     url(r'^logout/?', vlogout, name='logout'),
 
+    # enable waffle urls
+    (r'^', include('waffle.urls')),
+
     # Catch all, for history API routing
     url(r'^/?$', index, name='index')
 )

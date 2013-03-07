@@ -3,14 +3,6 @@
 var App = angular.module('App', [])
   .config(['$routeProvider', '$locationProvider', function($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: '/static/views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/login', {
-        templateUrl: '/static/views/login.html',
-        controller: 'LoginCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });
@@ -34,3 +26,13 @@ App.directive('activeLink', ['$location', function(location) {
         }
     };
 }]);
+
+App.directive('waffleSwitch', function() {
+    return {
+        replace: true,
+        restrict: 'A',
+        link: function(scope, element, attr){
+            element.css('display', waffle.switch_is_active(attr.waffleSwitch) ? '' : 'none');
+        }
+    };
+});
