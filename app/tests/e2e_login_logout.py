@@ -1,13 +1,14 @@
 from django.test import LiveServerTestCase
 from splinter import Browser
 from django.contrib.auth.models import User
+from waffle.models import Switch
 
 
 class FeatureLogin(LiveServerTestCase):
     """ Feature: Logging in and out """
 
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls):       
         cls.browser = Browser()
         super(FeatureLogin, cls).setUpClass()
 
@@ -15,6 +16,10 @@ class FeatureLogin(LiveServerTestCase):
     def tearDownClass(cls):
         cls.browser.quit()
         super(FeatureLogin, cls).tearDownClass()
+
+    def setUp(self):
+        # Create the login switch
+        self.switch, created = Switch.objects.get_or_create(name="Login", active=True, note='')
 
     def visit(self, rel_url):
         self.browser.visit('%s%s' % (self.live_server_url, rel_url))
@@ -70,3 +75,17 @@ class FeatureLogin(LiveServerTestCase):
 
         """ Then I will be logged out """
         self.assertEquals(self.browser.is_text_present("Login"), True)
+
+    #def test_switch(self):
+    #    """ Given the 'Login' switch is disabled """
+    #    self.switch.active = False
+    #    self.switch.save()
+
+    #    """ When I try to visit the login page """
+    #    self.visit('/#/login')
+
+    #    """ Then I will not be able to access it """
+    #    self.assertEquals(self.browser.is_text_present("Login"), False)
+
+    #    """ And there will be no login link """
+    #    self.assertEquals(self.browser.find_by_id('loginbtn'), None)
