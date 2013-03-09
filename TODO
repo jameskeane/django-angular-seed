@@ -1,0 +1,2 @@
+* Investigate removing the ng-compile management command, and replacing it with a PrecompilerFilter.
+* Integrate django-social-auth?
