@@ -29,6 +29,18 @@ class FeatureLogin(LiveServerTestCase):
         """ Then I should see the login page """
         self.assertEquals(self.browser.is_text_present('Please sign in'), True)
 
+    def test_invalid_login(self):
+        """ Given I am on the login page """
+        self.visit('/#/login')
+
+        """ When I fill in the user details with garbage and click submit """
+        self.browser.fill('username', 'garbage username')
+        self.browser.fill('password', 'garbage password')
+        self.browser.find_by_id('signin').click()
+
+        """ Then I should see a message telling me the information is invalid """
+        self.assertEquals(self.browser.is_text_present('Wrong username/password'), True)
+
     def test_login(self):
         """ Given I have a user """
         User.objects.create_superuser('admin', 'admin@example.com', 'admin')

@@ -158,6 +158,9 @@ INSTALLED_APPS = (
     'app'
 )
 
+# Allow query strings to override waffle
+WAFFLE_SWITCH_DEFAULT = True
+
 # Configure django_compressor to precompile all the files
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
