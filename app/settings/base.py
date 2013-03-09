@@ -172,14 +172,14 @@ COMPRESS_PRECOMPILERS = (
 )
 
 if ENV == 'production':
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
-    AWS_PRELOAD_METADATA = True
+    #AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
+    #AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
+    #AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
+    #AWS_PRELOAD_METADATA = True
 
     COMPRESS_ENABLED = True
     COMPRESS_OFFLINE = True
-    COMPRESS_STORAGE = STATICFILES_STORAGE = 'app.util.storage.CachedS3BotoStorage'
+    #COMPRESS_STORAGE = STATICFILES_STORAGE = 'app.util.storage.CachedS3BotoStorage'
     COMPRESS_URL = STATIC_URL
     COMPRESS_ROOT = STATIC_ROOT
 
