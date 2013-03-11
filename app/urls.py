@@ -1,10 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.generic.simple import redirect_to
 from rest_framework.renderers import JSONRenderer
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.db import IntegrityError
+import json
 
 # Enable the admin site
 from django.contrib import admin
@@ -36,6 +40,32 @@ def index(request):
       'user_json': JSONRenderer().render(user_json)
     })
 
+@csrf_exempt
+def register(request):
+    data = json.loads(request.raw_post_data)
+    user = User(**data)
+    user.set_password(data['password'])
+
+    try:
+        user.save()
+        user = authenticate(username=data['username'], password=data['password'])
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                request.user = user
+
+                # Once we have logged the user in return the serialized response
+                serializer = api.user.UserSerializer(request.user)
+                response = JSONResponse(serializer.data)
+                response.status_code = 201
+                return response
+
+    except IntegrityError:
+        pass
+
+    response = HttpResponse()
+    response.status_code = 409
+    return response
 
 def auth(request):
     if 'HTTP_AUTHORIZATION' in request.META:
@@ -70,6 +100,7 @@ urlpatterns = patterns('',
     # log in, log out routes.
     url(r'^auth/?', auth, name='auth'),
     url(r'^logout/?', vlogout, name='logout'),
+    url(r'^register/?', register, name='register'),
 
     # enable waffle urls
     (r'^', include('waffle.urls')),
