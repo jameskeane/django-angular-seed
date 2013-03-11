@@ -104,6 +104,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'waffle.middleware.WaffleMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -155,11 +156,17 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',  # Rest Framework API Token authentication
     'compressor',
+    'debug_toolbar',
     'app'
 )
 
 # Allow query strings to override waffle
 WAFFLE_SWITCH_DEFAULT = True
+
+# Configure django-debug-toolbar
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
 
 # Configure django_compressor to precompile all the files
 COMPRESS_PRECOMPILERS = (
