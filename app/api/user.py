@@ -1,12 +1,18 @@
 from django.contrib.auth.models import User, Group, Permission
+from app.models import UserProfile
 from rest_framework import serializers
 from rest_framework import generics
 
 
 # Serializers
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('confirmed_email',)
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     api_key = serializers.Field(source='api_key')
-    profile = serializers.Field(source='profile')
+    profile = UserProfileSerializer()
 
     class Meta:
         model = User

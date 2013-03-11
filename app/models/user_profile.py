@@ -6,6 +6,7 @@ from rest_framework.authtoken.models import Token
 
 class UserProfile(Model):
     user = models.ForeignKey(User, unique=True)
+    confirmed_email = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.user.__unicode__() + "'s Profile"
