@@ -8,9 +8,6 @@ class UserProfile(Model):
     user = models.ForeignKey(User, unique=True)
     confirmed_email = models.BooleanField(default=False)
 
-    def __unicode__(self):
-        return self.user.__unicode__() + "'s Profile"
-
 # Create an easy way to use the user profile
 # using user.profile will get or create a user profile
 # object

@@ -2,12 +2,16 @@
     <div class="well">
       <form id="signup" class="form-horizontal" ng-submit="register()">
         <legend>Register</legend>
+
+          <div class="alert alert-error" ng-show="error">
+            Username/email is already in use.
+          </div>
         <div class="control-group">
             <label class="control-label">Username</label>
             <div class="controls">
                 <div class="input-prepend">
                 <span class="add-on"><i class="icon-user"></i></span>
-                    <input type="text" class="input-xlarge" id="username" name="username" placeholder="Username" ng-model="username">
+                    <input type="text" class="input-xlarge" id="username" name="username" placeholder="Username" required ng-model="username">
                 </div>
             </div>
         </div>
@@ -16,7 +20,7 @@
             <div class="controls">
                 <div class="input-prepend">
                 <span class="add-on"><i class="icon-envelope"></i></span>
-                    <input type="text" class="input-xlarge" id="email" name="email" placeholder="Email" ng-model="email">
+                    <input type="text" class="input-xlarge" id="email" name="email" placeholder="Email" required ng-model="email">
                 </div>
             </div>
         </div>
@@ -25,7 +29,7 @@
             <div class="controls">
                 <div class="input-prepend">
                 <span class="add-on"><i class="icon-lock"></i></span>
-                    <input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password" ng-model="password">
+                    <input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password" required ng-model="password">
                 </div>
             </div>
         </div>
@@ -34,7 +38,7 @@
             <div class="controls">
                 <div class="input-prepend">
                 <span class="add-on"><i class="icon-lock"></i></span>
-                    <input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="Re-enter Password" ng-model="password_confirm">
+                    <input type="Password" id="conpasswd" class="input-xlarge" name="conpasswd" placeholder="Re-enter Password" required ng-model="password_confirm">
                 </div>
             </div>
         </div>

@@ -47,3 +47,13 @@ class FeatureRegistration(LiveServerTestCase):
 
         """ Then I will be logged in """
         self.assertEquals(self.browser.is_text_present('test_user1'), True)
+
+    def test_register_conflict(self):
+        """ Given a user """
+        self.test_register_user()
+
+        """ When I try to register a user with the same username or email """
+        self.test_register_user()
+
+        """ Then there will be an error message """
+        self.assertEquals(self.browser.is_text_present('Username/email is already in use'), True)
