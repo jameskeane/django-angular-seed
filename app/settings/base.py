@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django_extensions',
+    'django_nose',
     'south',
     'waffle',
     'rest_framework',
@@ -182,6 +183,18 @@ if ENV == 'production':
     #COMPRESS_STORAGE = STATICFILES_STORAGE = 'app.util.storage.CachedS3BotoStorage'
     COMPRESS_URL = STATIC_URL
     COMPRESS_ROOT = STATIC_ROOT
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['--failed', '--stop', '--processes=8', '--process-timeout=120', '--with-cov', '--cover-package=app']
+
+# Selenium grid settings
+SELENIUM_GRID = {
+    'url': 'http://ci.bnotions.com:5555/wd/hub',
+    'browser': 'iexplore',
+    'platform': 'ANY',
+    'javascriptEnabled': True,
+    'version': ''
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

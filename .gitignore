@@ -4,5 +4,6 @@ env/
 dist/
 .sass-cache/
 *.db
-.coverage
+.coverage*
 htmlcov
+.noseids

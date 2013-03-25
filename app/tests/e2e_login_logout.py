@@ -1,22 +1,10 @@
-from django.test import LiveServerTestCase
-from splinter import Browser
 from django.contrib.auth.models import User
 from waffle.models import Switch
+from app.tests import GridTestcase
 
 
-class FeatureLogin(LiveServerTestCase):
+class FeatureLogin(GridTestcase):
     """ Feature: Logging in and out """
-
-    @classmethod
-    def setUpClass(cls):       
-        cls.browser = Browser()
-        super(FeatureLogin, cls).setUpClass()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.browser.quit()
-        super(FeatureLogin, cls).tearDownClass()
-
     def setUp(self):
         # Create the login switch
         self.switch, created = Switch.objects.get_or_create(name="Login", active=True, note='')

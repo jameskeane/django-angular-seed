@@ -1,21 +1,9 @@
-from django.test import LiveServerTestCase
-from splinter import Browser
-from django.contrib.auth.models import User
 from waffle.models import Switch
+from app.tests import GridTestcase
 
 
-class FeatureRegistration(LiveServerTestCase):
+class FeatureRegistration(GridTestcase):
     """ Feature: Registering a user """
-
-    @classmethod
-    def setUpClass(cls):       
-        cls.browser = Browser()
-        super(FeatureRegistration, cls).setUpClass()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.browser.quit()
-        super(FeatureRegistration, cls).tearDownClass()
 
     def setUp(self):
         # Create the login switch
