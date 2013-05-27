@@ -19,7 +19,7 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
-        
+
         <!--[if lt IE 9]>
             <script src="/static/vendor/es5-shim.min.js"></script>
             <script src="/static/vendor/json3.min.js"></script>
@@ -31,7 +31,7 @@
 
         <div class="container" ng-view></div>
 
-        <script src="{% url wafflejs %}"></script>
+        <script src="{% url 'wafflejs' %}"></script>
         {% compress js %}
         <script type="text/javascript" src="/static/vendor/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="/static/vendor/angular.js"></script>
@@ -41,7 +41,7 @@
         <script type="text/javascript" src="/static/controllers/register.js"></script>
 
         <script type="text/javascript" src="/static/vendor/bootstrap/bootstrap-dropdown.js"></script>
-        
+
         <!-- we have modified the js-compressor to support ng templates -->
         <script type="text/ng-template" src="/static/views/main.html"></script>
         <script type="text/ng-template" src="/static/views/nav.html"></script>
@@ -62,7 +62,7 @@
           App.run(function($rootScope) {
             $rootScope.user = {{user_json|safe}};
           });
-          App.config(['$httpProvider', function($httpProvider) {   
+          App.config(['$httpProvider', function($httpProvider) {
             $httpProvider.defaults.headers.common['Authorization'] = 'Token {{user.api_key}}';
           }]);
         </script>
