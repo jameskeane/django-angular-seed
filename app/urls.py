@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.views.generic.simple import redirect_to
+from django.views.generic import RedirectView
 from rest_framework.renderers import JSONRenderer
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -93,7 +93,7 @@ def vlogout(request):
 urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/?', include(admin.site.urls)),
-    url(r'^favicon.ico$', redirect_to, {'url': '/static/favicon.ico'}),
+    url(r'^favicon.ico$', RedirectView.as_view(url='/static/favicon.ico')),
 
     url(r'^api', include(api.urls)),
 
